@@ -140,11 +140,13 @@ func downloadURLs(context context.Context, thread Thread, urls []string, wait *s
 		req, err := http.NewRequestWithContext(context, "GET", url, nil)
 		if err != nil {
 			log.Printf("error creating request: %v", err)
+			continue
 		}
 
 		resp, err := http.DefaultClient.Do(req)
 		if err != nil {
 			log.Printf("error downloading URL %s: %s, url, err\n", url, err)
+			continue
 		}
 
 		defer resp.Body.Close()
