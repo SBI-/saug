@@ -114,7 +114,10 @@ func extractURLs(pages []string) []string {
 		matches := re.FindAllStringSubmatch(page, -1)
 		for _, match := range matches {
 			if len(match) > 1 {
-				urls = append(urls, strings.Replace(match[1], "/thumb/", "/img/", -1))
+				url := strings.Replace(match[1], "/thumb/", "/img/", -1)
+				url = strings.Replace(url, "\n", "", -1)
+				url = strings.Replace(url, "\r", "", -1)
+				urls = append(urls, url)
 			}
 		}
 	}
